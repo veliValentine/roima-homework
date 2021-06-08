@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.service.DemoTransformer;
+import com.example.demo.service.TransformXMLService;
 import com.example.demo.service.ErrorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-class DemoController {
+class TransformXMLController {
 
-    private static final Logger log = LoggerFactory.getLogger(DemoController.class);
+    private static final Logger log = LoggerFactory.getLogger(TransformXMLController.class);
 
     @Autowired
-    private DemoTransformer demoTransformer;
+    private TransformXMLService transformXMLService;
 
     @Autowired
     private ErrorService errorService;
@@ -32,7 +32,7 @@ class DemoController {
         if (content.isBlank()){
             return errorService.http400("Request body is blank");
         }
-        String result = demoTransformer.transform(content);
+        String result = transformXMLService.transformXML(content);
         if (result.isBlank()){
             return errorService.http500("Could not parse given XML file");
         }

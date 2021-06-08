@@ -11,13 +11,13 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 @Service
-public class DemoTransformer {
+public class TransformXMLService {
 
-    private static final Logger log = LoggerFactory.getLogger(DemoTransformer.class);
+    private static final Logger log = LoggerFactory.getLogger(TransformXMLService.class);
 
-    public DemoTransformer(){}
+    public TransformXMLService(){}
 
-    public String transform(String message) {
+    public String transformXML(String message) {
 
         String result = "";
 
