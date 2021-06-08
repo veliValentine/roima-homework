@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,9 +17,7 @@ public class TransformXMLService {
     public TransformXMLService(){}
 
     public String transformXML(String message) {
-
         String result = "";
-
         try {
             StringReader reader = new StringReader(message);
             StringWriter writer = new StringWriter();
@@ -36,12 +33,9 @@ public class TransformXMLService {
             log.info("Transformed message: " + result);
 
         } catch (Exception e) {
+            log.error("error message: " + e.getMessage() + "\n" + "Message: " + message);
             e.printStackTrace();
         }
-
         return result;
-
     }
-
 }
-
