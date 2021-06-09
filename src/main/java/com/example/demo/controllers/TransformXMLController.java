@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.service.ParseXMLService;
-import com.example.demo.service.TransformXMLService;
 import com.example.demo.service.ErrorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,23 +26,20 @@ class TransformXMLController {
     @PostMapping(
             value = "/transform",
             headers = "content-type=application/xml",
-            produces="application/xml"
+            produces = "application/xml"
     )
     public ResponseEntity<String> transform(@RequestBody String content) {
-        if (content.isBlank()){
+        if (content.isBlank()) {
             return errorService.http400("Request body is blank");
         }
-        String result;
-        try{
-            result = parseXMLService.parseInputXML(content);
-        } catch (Exception e){
+        try {
+            String result = parseXMLService.parseInputXML(content);
+            if (result.isBlank()) {
+                throw new IllegalArgumentException("Can not parse given xml");
+            }
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        } catch (IllegalArgumentException e) {
             return errorService.http400(e.getMessage());
         }
-
-        if (result.isBlank()){
-            return errorService.http400("Could not parse given XML file");
-        }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
-
 }
