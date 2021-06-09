@@ -34,7 +34,7 @@ class TransformXMLController {
         }
         String result = transformXMLService.transformXML(content);
         if (result.isBlank()){
-            return errorService.http500("Could not parse given XML file");
+            return errorService.http400("Could not parse given XML file");
         }
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
