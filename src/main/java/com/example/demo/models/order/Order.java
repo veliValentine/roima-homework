@@ -1,17 +1,17 @@
 package com.example.demo.models.order;
 
 import com.example.demo.models.TimeStamp;
-import com.example.demo.models.XMLConverters.XMLItem;
-import com.example.demo.models.XMLConverters.XMLRowItem;
+import com.example.demo.models.XmlConverters.XmlItem;
+import com.example.demo.models.XmlConverters.XmlRowItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Order implements XMLItem {
+public class Order implements XmlItem {
 
     private String orderId;
     private String timeStamp;
-    private ArrayList<XMLRowItem> rows;
+    private ArrayList<XmlRowItem> rows;
 
     public Order(String orderId) {
         this.orderId = orderId;
@@ -19,11 +19,11 @@ public class Order implements XMLItem {
         this.rows = new ArrayList<>();
     }
 
-    public void addRow(XMLRowItem item) {
+    public void addRow(XmlRowItem item) {
         rows.add(item);
     }
 
-    public void addRows(Collection<XMLRowItem> items) {
+    public void addRows(Collection<XmlRowItem> items) {
         rows.addAll(items);
     }
 
@@ -43,16 +43,16 @@ public class Order implements XMLItem {
         this.timeStamp = timeStamp;
     }
 
-    public ArrayList<XMLRowItem> getRows() {
+    public ArrayList<XmlRowItem> getRows() {
         return rows;
     }
 
-    public void setRows(ArrayList<XMLRowItem> rows) {
+    public void setRows(ArrayList<XmlRowItem> rows) {
         this.rows = rows;
     }
 
     @Override
-    public String toXML() {
+    public String toXml() {
         StringBuilder builder = new StringBuilder();
         builder.append("<order>");
         builder.append("\n");
@@ -67,8 +67,8 @@ public class Order implements XMLItem {
         if(rows.size() > 0){
             builder.append("<orderRows>");
             for (int i = 0; i < rows.size(); i++) {
-                XMLRowItem row = rows.get(i);
-                builder.append(row.toXMLRowItem(i + 1));
+                XmlRowItem row = rows.get(i);
+                builder.append(row.toXmlRowItem(i + 1));
                 builder.append("\n");
             }
             builder.append("</orderRows>");

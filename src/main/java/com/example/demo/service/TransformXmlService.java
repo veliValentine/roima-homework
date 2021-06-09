@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.models.XMLConverters.XMLRowItem;
+import com.example.demo.models.XmlConverters.XmlRowItem;
 import com.example.demo.models.order.Order;
 import com.example.demo.models.order.OrderItem;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class TransformXMLService {
+public class TransformXmlService {
 
     private final String ROOT_START = "<root>";
     private final String ROOT_END = "</root>";
@@ -28,12 +28,12 @@ public class TransformXMLService {
     private final String DESCRIPTION_START = "<description>";
     private final String DESCRIPTION_END = "</description>";
 
-    public String parseInputXML(String inputXML) throws IllegalArgumentException {
-        if (inputXML.isBlank()) throw new IllegalArgumentException("Input is blank");
-        String input = parseInput(inputXML);
+    public String parseInputXml(String inputXml) throws IllegalArgumentException {
+        if (inputXml.isBlank()) throw new IllegalArgumentException("Input is blank");
+        String input = parseInput(inputXml);
         String rootContent = getElement(input, ROOT_START, ROOT_END);
         Order order = getOrder(rootContent);
-        return order.toXML();
+        return order.toXml();
     }
 
     private String parseInput(String input) {
@@ -54,7 +54,7 @@ public class TransformXMLService {
         return id + "_" + batch;
     }
 
-    private void addOrderRows(ArrayList<XMLRowItem> rows, String orderElement){
+    private void addOrderRows(ArrayList<XmlRowItem> rows, String orderElement){
         String rowsElement = getElement(orderElement, ROWS_START, ROWS_END);
         if (rowsElement.isBlank()){
             throw new IllegalArgumentException("There has to be at least one <row>-element");
@@ -62,7 +62,7 @@ public class TransformXMLService {
         while (elementContains(rowsElement, ROW_START, ROW_END)) {
             OrderItem orderItem = getOrderItem(rowsElement);
             rows.add(orderItem);
-            rowsElement = getNextElement(rowsElement, ROW_END);
+            rowsElement = getNextRowElement(rowsElement);
         }
     }
 
@@ -95,9 +95,9 @@ public class TransformXMLService {
         return startIndex < endIndex;
     }
 
-    private String getNextElement(String element, String endElement) {
-        int indexOfEndElement = element.indexOf(endElement);
-        int endIndexOfEndElement = indexOfEndElement + endElement.length();
+    private String getNextRowElement(String element) {
+        int indexOfEndElement = element.indexOf(ROW_END);
+        int endIndexOfEndElement = indexOfEndElement + ROW_END.length();
         return element.substring(endIndexOfEndElement);
     }
 }

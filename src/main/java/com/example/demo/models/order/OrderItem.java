@@ -1,8 +1,8 @@
 package com.example.demo.models.order;
 
-import com.example.demo.models.XMLConverters.XMLRowItem;
+import com.example.demo.models.XmlConverters.XmlRowItem;
 
-public class OrderItem implements XMLRowItem {
+public class OrderItem implements XmlRowItem {
     private String description;
 
     public OrderItem(String description){
@@ -18,7 +18,7 @@ public class OrderItem implements XMLRowItem {
     }
 
     @Override
-    public String toXMLRowItem(int rowNumber) {
+    public String toXmlRowItem(int rowNumber) {
         StringBuilder builder = new StringBuilder();
         builder.append("<orderRow>");
         builder.append("<rowNumber>");

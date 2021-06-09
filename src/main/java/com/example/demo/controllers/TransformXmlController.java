@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.service.TransformXMLService;
+import com.example.demo.service.TransformXmlService;
 import com.example.demo.service.ErrorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-class TransformXMLController {
+class TransformXmlController {
 
-    private static final Logger log = LoggerFactory.getLogger(TransformXMLController.class);
+    private static final Logger log = LoggerFactory.getLogger(TransformXmlController.class);
 
     @Autowired
-    private TransformXMLService transformXMLService;
+    private TransformXmlService transformXMLService;
 
     @Autowired
     private ErrorService errorService;
@@ -33,7 +33,7 @@ class TransformXMLController {
             return errorService.http400("Request body is blank");
         }
         try {
-            String result = transformXMLService.parseInputXML(content);
+            String result = transformXMLService.parseInputXml(content);
             if (result.isBlank()) {
                 throw new IllegalArgumentException("Can not parse given xml");
             }
