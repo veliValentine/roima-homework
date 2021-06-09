@@ -21,7 +21,7 @@ public class TransformXmlService {
     private String validate(String input) throws IllegalArgumentException {
         input = input.replace("\n", "")
                 .replace(" ", "");
-        if (input.isBlank()) throw new IllegalArgumentException("Input is blank");
+        if (input.isBlank()) throw new IllegalArgumentException("Content is blank");
         return input;
     }
 

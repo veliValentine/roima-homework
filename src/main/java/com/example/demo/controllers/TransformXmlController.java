@@ -29,9 +29,6 @@ class TransformXmlController {
             produces = "application/xml"
     )
     public ResponseEntity<String> transform(@RequestBody String content) {
-        if (content.isBlank()) {
-            return errorService.http400("Request body is blank");
-        }
         try {
             String result = transformXMLService.parseInputXmlOrder(content);
             if (result.isBlank()) {
