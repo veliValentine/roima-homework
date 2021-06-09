@@ -11,10 +11,6 @@ public class ErrorService {
         return errorStatus(message, HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<String> http500(String message) {
-        return errorStatus(message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
     private ResponseEntity<String> errorStatus(String message, HttpStatus status){
         return new ResponseEntity<>("error: " + message, status);
     }
