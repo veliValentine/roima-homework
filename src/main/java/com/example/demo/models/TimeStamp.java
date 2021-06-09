@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TimeStamp {
 
-    private static String TIME_STAMP_PATTERN = "yyyy-MM-dd hh:mm:ss:SSS";
+    private static final String TIME_STAMP_PATTERN = "yyyy-MM-dd hh:mm:ss:SSS";
 
     public static String currentUTCTime(){
         ZoneId UTC_TIME_ZONE =ZoneId.from(ZoneOffset.UTC);
