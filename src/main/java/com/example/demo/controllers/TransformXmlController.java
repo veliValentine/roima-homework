@@ -33,7 +33,7 @@ class TransformXmlController {
             return errorService.http400("Request body is blank");
         }
         try {
-            String result = transformXMLService.parseInputXml(content);
+            String result = transformXMLService.parseInputXmlOrder(content);
             if (result.isBlank()) {
                 throw new IllegalArgumentException("Can not parse given xml");
             }

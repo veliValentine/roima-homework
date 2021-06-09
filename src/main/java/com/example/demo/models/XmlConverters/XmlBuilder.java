@@ -7,17 +7,10 @@ import java.util.List;
 
 public class XmlBuilder {
 
-    private StringBuilder builder;
+    private static StringBuilder builder;
 
-    public XmlBuilder() {
+    public static String buildOrder(Order order) {
         builder = new StringBuilder();
-    }
-
-    public void resetBuilder() {
-        builder = new StringBuilder();
-    }
-
-    public String buildOrder(Order order) {
         builder.append("<order>\n");
         addOrderId(order.getOrderId());
         addDocumentTimeDate(order.getTimeStamp());
@@ -26,19 +19,19 @@ public class XmlBuilder {
         return builder.toString();
     }
 
-    private void addOrderId(String orderId) {
+    private static void addOrderId(String orderId) {
         builder.append("<orderId>");
         builder.append(orderId);
         builder.append("</orderId>");
     }
 
-    private void addDocumentTimeDate(String timeDate) {
+    private static void addDocumentTimeDate(String timeDate) {
         builder.append("<documentDateTime>");
         builder.append(timeDate);
         builder.append("</documentDateTime>");
     }
 
-    private void addOrderRows(List<OrderItem> orderItems) {
+    private static void addOrderRows(List<OrderItem> orderItems) {
         if (orderItems.size() > 0) {
             builder.append("<orderRows>");
             builder.append("\n");
@@ -50,20 +43,20 @@ public class XmlBuilder {
         }
     }
 
-    private void addOrderRow(OrderItem order, int number) {
+    private static void addOrderRow(OrderItem order, int number) {
         builder.append("<orderRow>");
         addRowNumber(number);
         addDescription(order.getDescription());
         builder.append("</orderRow>");
     }
 
-    private void addRowNumber(int rowNumber) {
+    private static void addRowNumber(int rowNumber) {
         builder.append("<rowNumber>");
         builder.append(rowNumber);
         builder.append("</rowNumber>");
     }
 
-    private void addDescription(String description) {
+    private static void addDescription(String description) {
         builder.append("<description>");
         builder.append(description);
         builder.append("</description>");
