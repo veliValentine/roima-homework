@@ -1,4 +1,4 @@
-package com.example.demo.models.XmlConverters;
+package com.example.demo.service.XmlConverters;
 
 public abstract class ParseXml {
     protected static final String ROOT_START = "<root>";

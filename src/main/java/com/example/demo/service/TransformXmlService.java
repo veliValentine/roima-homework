@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.models.XmlConverters.OrderBuilder;
-import com.example.demo.models.XmlConverters.ParseXml;
-import com.example.demo.models.XmlConverters.XmlBuilder;
+import com.example.demo.service.XmlConverters.OrderBuilder;
+import com.example.demo.service.XmlConverters.ParseXml;
+import com.example.demo.service.XmlConverters.XmlBuilder;
 import com.example.demo.models.order.Order;
 import org.springframework.stereotype.Service;
 
