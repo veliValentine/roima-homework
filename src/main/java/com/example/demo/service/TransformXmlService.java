@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.models.XmlConverters.XmlRowItem;
+import com.example.demo.models.XmlConverters.XmlBuilder;
 import com.example.demo.models.order.Order;
 import com.example.demo.models.order.OrderItem;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,8 @@ public class TransformXmlService {
         String input = parseInput(inputXml);
         String rootContent = getElement(input, ROOT_START, ROOT_END);
         Order order = getOrder(rootContent);
-        return order.toXml();
+        XmlBuilder builder = new XmlBuilder();
+        return builder.buildOrder(order);
     }
 
     private String parseInput(String input) {
@@ -54,7 +55,7 @@ public class TransformXmlService {
         return id + "_" + batch;
     }
 
-    private void addOrderRows(ArrayList<XmlRowItem> rows, String orderElement){
+    private void addOrderRows(ArrayList<OrderItem> rows, String orderElement){
         String rowsElement = getElement(orderElement, ROWS_START, ROWS_END);
         if (rowsElement.isBlank()){
             throw new IllegalArgumentException("There has to be at least one <row>-element");

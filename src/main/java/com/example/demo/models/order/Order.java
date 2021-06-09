@@ -1,17 +1,15 @@
 package com.example.demo.models.order;
 
 import com.example.demo.models.TimeStamp;
-import com.example.demo.models.XmlConverters.XmlItem;
-import com.example.demo.models.XmlConverters.XmlRowItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Order implements XmlItem {
+public class Order{
 
     private String orderId;
     private String timeStamp;
-    private ArrayList<XmlRowItem> rows;
+    private ArrayList<OrderItem> rows;
 
     public Order(String orderId) {
         this.orderId = orderId;
@@ -19,11 +17,11 @@ public class Order implements XmlItem {
         this.rows = new ArrayList<>();
     }
 
-    public void addRow(XmlRowItem item) {
+    public void addRow(OrderItem item) {
         rows.add(item);
     }
 
-    public void addRows(Collection<XmlRowItem> items) {
+    public void addRows(Collection<OrderItem> items) {
         rows.addAll(items);
     }
 
@@ -43,37 +41,12 @@ public class Order implements XmlItem {
         this.timeStamp = timeStamp;
     }
 
-    public ArrayList<XmlRowItem> getRows() {
+    public ArrayList<OrderItem> getRows() {
         return rows;
     }
 
-    public void setRows(ArrayList<XmlRowItem> rows) {
+    public void setRows(ArrayList<OrderItem> rows) {
         this.rows = rows;
     }
 
-    @Override
-    public String toXml() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<order>");
-        builder.append("\n");
-        builder.append("<orderId>");
-        builder.append(orderId);
-        builder.append("</orderId>");
-        builder.append("\n");
-        builder.append("<documentDateTime>");
-        builder.append(timeStamp);
-        builder.append("</documentDateTime>");
-        builder.append("\n");
-        if(rows.size() > 0){
-            builder.append("<orderRows>");
-            for (int i = 0; i < rows.size(); i++) {
-                XmlRowItem row = rows.get(i);
-                builder.append(row.toXmlRowItem(i + 1));
-                builder.append("\n");
-            }
-            builder.append("</orderRows>");
-        }
-        builder.append("</order>");
-        return builder.toString();
-    }
 }
