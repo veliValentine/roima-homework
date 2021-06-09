@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.service.ParseXMLService;
+import com.example.demo.service.TransformXMLService;
 import com.example.demo.service.ErrorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ class TransformXMLController {
     private static final Logger log = LoggerFactory.getLogger(TransformXMLController.class);
 
     @Autowired
-    private ParseXMLService parseXMLService;
+    private TransformXMLService transformXMLService;
 
     @Autowired
     private ErrorService errorService;
@@ -33,7 +33,7 @@ class TransformXMLController {
             return errorService.http400("Request body is blank");
         }
         try {
-            String result = parseXMLService.parseInputXML(content);
+            String result = transformXMLService.parseInputXML(content);
             if (result.isBlank()) {
                 throw new IllegalArgumentException("Can not parse given xml");
             }
