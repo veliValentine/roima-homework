@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.service.ParseXMLService;
 import com.example.demo.service.TransformXMLService;
 import com.example.demo.service.ErrorService;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ class TransformXMLController {
     private static final Logger log = LoggerFactory.getLogger(TransformXMLController.class);
 
     @Autowired
-    private TransformXMLService transformXMLService;
+    private ParseXMLService parseXMLService;
 
     @Autowired
     private ErrorService errorService;
@@ -32,7 +33,13 @@ class TransformXMLController {
         if (content.isBlank()){
             return errorService.http400("Request body is blank");
         }
-        String result = transformXMLService.transformXML(content);
+        String result;
+        try{
+            result = parseXMLService.parseInputXML(content);
+        } catch (Exception e){
+            return errorService.http400(e.getMessage());
+        }
+
         if (result.isBlank()){
             return errorService.http400("Could not parse given XML file");
         }
